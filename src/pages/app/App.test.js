@@ -12,7 +12,10 @@ const server = setupServer(
   })
 )
 
-beforeAll(() => server.listen());
+beforeAll(() => {
+  global.window.HTMLMediaElement.prototype.play = () => { };
+  server.listen()
+});
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
